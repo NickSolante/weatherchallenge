@@ -3,7 +3,7 @@
     <b-container>
       <div>
         <h1 class="title">
-          weather
+          Weather App
         </h1>
         <Table
           v-for="weather in weatherData"

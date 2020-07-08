@@ -1,8 +1,8 @@
 <template>
   <nuxt-link id :to="'/' + id">
-    <div class="weather grid-style text-center card">
-      <p>{{ weather }}</p>
+    <div class="grid-style text-center card">
       <p>{{ name }}</p>
+      <p>{{ weather }}</p>
       <p>{{ temp }}</p>
       <p>{{ updated }}</p>
     </div>

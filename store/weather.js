@@ -21,10 +21,10 @@ export const getters = {
   findLocation: (state) => (id) => {
     const rawLocation = state.weatherData.find((data) => data._venueID === id)
     return {
-      id: parseInt(rawLocation._venueID),
-      name: rawLocation._name,
+      suburb: rawLocation._name,
       weatherCondition: rawLocation._weatherConditionIcon,
       temp: parseInt(rawLocation._weatherTemp),
+      feelsLike: parseInt(rawLocation._weatherFeelsLike),
       lastUpdated: moment.unix(rawLocation._weatherLastUpdated).format('LLL'),
     }
   },

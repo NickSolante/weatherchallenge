@@ -1,6 +1,6 @@
 <template>
   <div class="weather grid-style text-center card">
-    {{ findLocation(this.$route.params.id) }}
+    <p>{{ temp }}</p>
   </div>
 </template>
 
@@ -8,10 +8,24 @@
 import { mapGetters } from 'vuex'
 export default {
   data() {
-    return {}
+    return {
+      temp: 0,
+      suburb: '',
+      weatherCondition: '',
+      updated: '',
+      feelsLike: 0,
+    }
   },
   computed: {
     ...mapGetters('weather', ['findLocation']),
+  },
+  mounted() {
+    const location = this.findLocation(this.$route.params.id)
+    this.temp = location.temp
+    this.suburb = location.suburb
+    this.weatherCondition = location.weatherCondition
+    this.updated = location.updated
+    this.feelsLike = location.feelsLike
   },
 }
 </script>
