@@ -1,10 +1,12 @@
 <template>
   <nuxt-link id :to="'/' + id">
-    <div class="grid-style text-center card">
-      <p>{{ name }}</p>
-      <p>{{ weather }}</p>
-      <p>{{ temp }}</p>
-      <p>{{ updated }}</p>
+    <div class="grid-style">
+      <div class="text-center card">
+        <p>{{ name }}</p>
+        <p>{{ weather }}</p>
+        <p class="temperature">{{ temp + '°' }}</p>
+        <p>{{ updated }}</p>
+      </div>
     </div>
   </nuxt-link>
 </template>
@@ -31,12 +33,16 @@ export default {
 }
 .grid-style {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 .card {
   padding: 1rem;
   border: #ccc 1px dotted;
   margin: 0.7rem 0;
+}
+.temperature {
+  font-weight: bold;
+  font-size: 50px;
 }
 </style>
