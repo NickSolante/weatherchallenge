@@ -26,7 +26,7 @@ Clone the repo by clicking the code button on the right hand side or go to the d
 
 ```bash
 $ git clone git@github.com:NickSolante/weatherchallenge.git
-cd weather
+cd weatherchallenge
 ```
 
 once you've done that install all of the dependecies by
