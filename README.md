@@ -62,7 +62,7 @@ npm run lint is for linting and knowing that the code follows the format specifi
 $ npm run test
 ```
 
-npm run test runs whatever testing framework that was specified by the developer and in this case jest
+npm run test runs test scripts with jest
 
 
 ## Built With
