@@ -1,18 +1,16 @@
 <template>
   <b-col sm="6">
-    <nuxt-link id :to="'/' + id">
-      <div>
-        <div class="text-center card">
-          <p class="suburb">{{ name }}</p>
-          <p class="iconSize">
-            <font-awesome-icon :icon="icons" />
-          </p>
-          <p>{{ condition }}</p>
-          <p class="temperature">{{ temp + '°' }}</p>
-          <p>{{ updated }}</p>
-        </div>
+    <div>
+      <div class="text-center card">
+        <p class="suburb">{{ name }}</p>
+        <p class="iconSize">
+          <font-awesome-icon :icon="icons" />
+        </p>
+        <p>{{ condition }}</p>
+        <p class="temperature">{{ temp + '°' }}</p>
+        <p>{{ updated }}</p>
       </div>
-    </nuxt-link>
+    </div>
   </b-col>
 </template>
 

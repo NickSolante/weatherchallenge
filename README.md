@@ -1,6 +1,6 @@
 # Weather 🚀
 
-A single page web application built on Vue & Nuxt that fetches and displays the weather conditions for different suburbs around Australia and some other countries. Some sorting/filtering of the weather data.
+An MVP of a single page web application built on Vue & Nuxt that fetches and displays the weather conditions for different suburbs around Australia and some other countries. Some sorting/filtering of the weather data.
 
 ## Getting Started
 
@@ -53,12 +53,12 @@ $ npm run lint && npm run test
 let me explain the tests that we ran
 
 ```
-npm run lint
+$ npm run lint
 ```
 npm run lint is for linting and knowing that the code follows the format specified by the developer
 
 ```
-npm run test
+$ npm run test
 ```
 
 npm run test runs whatever testing framework that was specified by the developer and in this case jest

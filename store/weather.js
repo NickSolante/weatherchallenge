@@ -1,3 +1,5 @@
+// I used vuex to try and consolidate state as much as possible
+
 import moment from 'moment'
 import sortby from 'lodash.sortby'
 export const state = () => ({
@@ -48,12 +50,18 @@ export const mutations = {
       name: data._name,
       weatherCondition: data._weatherCondition,
       weatherIcon: data._weatherConditionIcon,
+      // there were fields that did not have any key or value at all so I had to give them a default value
       temp: data._weatherTemp === undefined ? 0 : parseInt(data._weatherTemp),
       lastUpdated:
         data._weatherLastUpdated === undefined
           ? moment(0).format('LLL')
           : moment.unix(data._weatherLastUpdated).format('LLL'),
     }))
+
+    // only alphabetical was called here because when I called serverlastupdated and temperature
+    // a bug occured where all three states below weatherData turned out to be the same even when sorting
+    // I was trying to keep it DRY as possible but was unsuccessful
+
     state.weatherData = data
     state.alphabetical = dataTransformation
   },
@@ -69,6 +77,7 @@ export const mutations = {
       return 0
     })
   },
+  // due to the bug I could not solve the below code has a lot of repetition and is very verbose
   sortTemperature(state, data) {
     state.temperatureLevel = data
       .map((data) => ({
