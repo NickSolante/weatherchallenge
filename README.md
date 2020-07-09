@@ -38,7 +38,7 @@ $ npm run dev
 # By default if nothing is running on the machine it will come out on localhost:3000
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+
 
 ## Running the tests
 
