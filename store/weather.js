@@ -11,11 +11,12 @@ export const getters = {
   weatherData: (state) => {
     return state.weatherData.map((data) => ({
       id: parseInt(data._venueID),
-      name: data._name,
+      suburb: data._name,
       weatherCondition: data._weatherCondition,
       weatherIcon: data._weatherConditionIcon,
       temp: data._weatherTemp === undefined ? 0 : parseInt(data._weatherTemp),
       lastUpdated: moment.unix(data._weatherLastUpdated).format('LLL'),
+      country: data._country._name,
     }))
   },
   temperatureLevels: (state) => {

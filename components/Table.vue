@@ -37,12 +37,16 @@ export default {
   methods: {
     iconHandler(weather) {
       switch (weather) {
+        case 'thunderstorm':
+          return 'bolt'
+        case 'overcast':
+          return 'cloud-sun'
         case 'partlycloudy':
           return 'cloud-sun'
         case 'clear':
           return 'sun'
         case 'cloudy':
-          return 'cloudy'
+          return 'cloud'
         case 'mostlycloudy':
           return 'cloud'
         case 'rain':

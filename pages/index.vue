@@ -45,6 +45,9 @@
                 :updated="weather.lastUpdated"
               /> </b-row
           ></b-tab>
+          <b-tab title="Filter"
+            ><b-row> <FilterTable /> </b-row
+          ></b-tab>
         </b-tabs>
       </div>
     </div>
@@ -54,9 +57,11 @@
 <script>
 import { mapGetters } from 'vuex'
 import Table from '../components/Table'
+import FilterTable from '../components/FilterTable'
 export default {
   components: {
     Table,
+    FilterTable,
   },
   async fetch() {
     const weather = await fetch(
@@ -72,7 +77,6 @@ export default {
   },
   computed: {
     ...mapGetters('weather', [
-      'weatherData',
       'temperatureLevels',
       'alphabeticalOrder',
       'mostRecentServerUpdate',
