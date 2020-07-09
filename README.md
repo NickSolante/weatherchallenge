@@ -38,6 +38,7 @@ $ npm run dev
 # By default if nothing is running on the machine it will come out on localhost:3000
 ```
 
+![Screen Shot 2020-07-10 at 9 39 41 am](https://user-images.githubusercontent.com/41457938/87101030-4dd3e400-c291-11ea-830f-d3a562c8e834.png)
 
 
 ## Running the tests
