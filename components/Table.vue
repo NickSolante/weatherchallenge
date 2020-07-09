@@ -4,9 +4,7 @@
       <div>
         <div class="text-center card">
           <p class="suburb">{{ name }}</p>
-          <p class="iconSize">
-            <ion-icon class="text-center" :name="ionicon" />
-          </p>
+          <p class="iconSize"></p>
           <p>{{ condition }}</p>
           <p class="temperature">{{ temp + '°' }}</p>
           <p>{{ updated }}</p>

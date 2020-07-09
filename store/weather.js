@@ -1,6 +1,10 @@
 import moment from 'moment'
+import sortby from 'lodash.sortby'
 export const state = () => ({
   weatherData: [],
+  temperatureLevel: [],
+  alphabetical: [],
+  serverLastUpdated: [],
 })
 
 export const getters = {
@@ -10,15 +14,20 @@ export const getters = {
       name: data._name,
       weatherCondition: data._weatherCondition,
       weatherIcon: data._weatherConditionIcon,
-      temp: parseInt(data._weatherTemp),
+      temp: data._weatherTemp === undefined ? 0 : parseInt(data._weatherTemp),
       lastUpdated: moment.unix(data._weatherLastUpdated).format('LLL'),
     }))
   },
-  sortViaTemperature: (state) => {
-    return state.weatherData.sort(function (a, b) {
-      return a.temp - b.temp
-    })
+  temperatureLevels: (state) => {
+    return state.temperatureLevel
   },
+  alphabeticalOrder: (state) => {
+    return state.alphabetical
+  },
+  mostRecentServerUpdate: (state) => {
+    return state.serverLastUpdated
+  },
+
   findLocation: (state) => (id) => {
     const rawLocation = state.weatherData.find((data) => data._venueID === id)
     return {
@@ -34,5 +43,59 @@ export const getters = {
 export const mutations = {
   getWeather(state, data) {
     state.weatherData = data
+  },
+  sortAlphabetically(state, data) {
+    state.alphabetical = data
+      .map((data) => ({
+        id: parseInt(data._venueID),
+        name: data._name,
+        weatherCondition: data._weatherCondition,
+        weatherIcon: data._weatherConditionIcon,
+        temp: data._weatherTemp === undefined ? 0 : parseInt(data._weatherTemp),
+        lastUpdated:
+          data._weatherLastUpdated === undefined
+            ? moment(0).format('LLL')
+            : moment.unix(data._weatherLastUpdated).format('LLL'),
+      }))
+      .sort((a, b) => {
+        if (a._name < b._name) {
+          return -1
+        }
+        if (a._name > b._name) {
+          return 1
+        }
+        return 0
+      })
+  },
+  sortTemperature(state, data) {
+    state.temperatureLevel = data
+      .map((data) => ({
+        id: parseInt(data._venueID),
+        name: data._name,
+        weatherCondition: data._weatherCondition,
+        weatherIcon: data._weatherConditionIcon,
+        temp: data._weatherTemp === undefined ? 0 : parseInt(data._weatherTemp),
+        lastUpdated:
+          data._weatherLastUpdated === undefined
+            ? moment(0).format('LLL')
+            : moment.unix(data._weatherLastUpdated).format('LLL'),
+      }))
+      .sort((a, b) => b.temp - a.temp)
+  },
+  sortByDate(state, data) {
+    const dateSort = sortby(data, function (o) {
+      return moment(o._weatherLastUpdated)
+    })
+    state.serverLastUpdated = dateSort.map((data) => ({
+      id: parseInt(data._venueID),
+      name: data._name,
+      weatherCondition: data._weatherCondition,
+      weatherIcon: data._weatherConditionIcon,
+      temp: data._weatherTemp === undefined ? 0 : parseInt(data._weatherTemp),
+      lastUpdated:
+        data._weatherLastUpdated === undefined
+          ? moment(0).format('LLL')
+          : moment.unix(data._weatherLastUpdated).format('LLL'),
+    }))
   },
 }

@@ -4,9 +4,52 @@
       <h1 class="title">
         Weather App
       </h1>
+      <div>
+        <b-tabs content-class="mt-3" align="center">
+          <b-tab title="Alphabetical" active
+            ><b-row>
+              <Table
+                v-for="weather in alphabeticalOrder"
+                :id="weather.id"
+                :key="weather.id"
+                :name="weather.name"
+                :condition="weather.weatherCondition"
+                :icon="weather.weatherIcon"
+                :temp="weather.temp"
+                :updated="weather.lastUpdated"
+              /> </b-row
+          ></b-tab>
+          <b-tab title="Temperature"
+            ><b-row>
+              <Table
+                v-for="weather in temperatureLevels"
+                :id="weather.id"
+                :key="weather.id"
+                :name="weather.name"
+                :condition="weather.weatherCondition"
+                :icon="weather.weatherIcon"
+                :temp="weather.temp"
+                :updated="weather.lastUpdated"
+              /> </b-row
+          ></b-tab>
+          <b-tab title="Last Updated"
+            ><b-row>
+              <Table
+                v-for="weather in temperatureLevels"
+                :id="weather.id"
+                :key="weather.id"
+                :name="weather.name"
+                :condition="weather.weatherCondition"
+                :icon="weather.weatherIcon"
+                :temp="weather.temp"
+                :updated="weather.lastUpdated"
+              /> </b-row
+          ></b-tab>
+        </b-tabs>
+      </div>
       <b-row>
         <Table
-          v-for="weather in weatherData"
+          v-for="weather in mostRecentServerUpdate"
           :id="weather.id"
           :key="weather.id"
           :name="weather.name"
@@ -32,12 +75,20 @@ export default {
       'http://dnu5embx6omws.cloudfront.net/venues/weather.json'
     ).then((res) => res.json())
     this.$store.commit('weather/getWeather', weather.data)
+    this.$store.commit('weather/sortTemperature', weather.data)
+    this.$store.commit('weather/sortAlphabetically', weather.data)
+    this.$store.commit('weather/sortByDate', weather.data)
   },
   data() {
     return {}
   },
   computed: {
-    ...mapGetters('weather', ['weatherData', 'sortTemp']),
+    ...mapGetters('weather', [
+      'weatherData',
+      'temperatureLevels',
+      'alphabeticalOrder',
+      'mostRecentServerUpdate',
+    ]),
   },
 }
 </script>
