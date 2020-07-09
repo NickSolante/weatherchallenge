@@ -35,7 +35,7 @@
           <b-tab title="Last Updated"
             ><b-row>
               <Table
-                v-for="weather in temperatureLevels"
+                v-for="weather in mostRecentServerUpdate"
                 :id="weather.id"
                 :key="weather.id"
                 :name="weather.name"
@@ -47,18 +47,6 @@
           ></b-tab>
         </b-tabs>
       </div>
-      <b-row>
-        <Table
-          v-for="weather in mostRecentServerUpdate"
-          :id="weather.id"
-          :key="weather.id"
-          :name="weather.name"
-          :condition="weather.weatherCondition"
-          :icon="weather.weatherIcon"
-          :temp="weather.temp"
-          :updated="weather.lastUpdated"
-        />
-      </b-row>
     </div>
   </div>
 </template>

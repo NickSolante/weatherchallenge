@@ -42,30 +42,31 @@ export const getters = {
 
 export const mutations = {
   getWeather(state, data) {
+    const dataTransformation = data.map((data) => ({
+      id: parseInt(data._venueID),
+      name: data._name,
+      weatherCondition: data._weatherCondition,
+      weatherIcon: data._weatherConditionIcon,
+      temp: data._weatherTemp === undefined ? 0 : parseInt(data._weatherTemp),
+      lastUpdated:
+        data._weatherLastUpdated === undefined
+          ? moment(0).format('LLL')
+          : moment.unix(data._weatherLastUpdated).format('LLL'),
+    }))
     state.weatherData = data
+    state.alphabetical = dataTransformation
   },
-  sortAlphabetically(state, data) {
-    state.alphabetical = data
-      .map((data) => ({
-        id: parseInt(data._venueID),
-        name: data._name,
-        weatherCondition: data._weatherCondition,
-        weatherIcon: data._weatherConditionIcon,
-        temp: data._weatherTemp === undefined ? 0 : parseInt(data._weatherTemp),
-        lastUpdated:
-          data._weatherLastUpdated === undefined
-            ? moment(0).format('LLL')
-            : moment.unix(data._weatherLastUpdated).format('LLL'),
-      }))
-      .sort((a, b) => {
-        if (a._name < b._name) {
-          return -1
-        }
-        if (a._name > b._name) {
-          return 1
-        }
-        return 0
-      })
+  sortAlphabetically(state) {
+    const temporaryData = state.alphabetical
+    state.alphabetical = temporaryData.sort((a, b) => {
+      if (a._name < b._name) {
+        return -1
+      }
+      if (a._name > b._name) {
+        return 1
+      }
+      return 0
+    })
   },
   sortTemperature(state, data) {
     state.temperatureLevel = data
@@ -85,8 +86,7 @@ export const mutations = {
   sortByDate(state, data) {
     const dateSort = sortby(data, function (o) {
       return moment(o._weatherLastUpdated)
-    })
-    state.serverLastUpdated = dateSort.map((data) => ({
+    }).map((data) => ({
       id: parseInt(data._venueID),
       name: data._name,
       weatherCondition: data._weatherCondition,
@@ -97,5 +97,6 @@ export const mutations = {
           ? moment(0).format('LLL')
           : moment.unix(data._weatherLastUpdated).format('LLL'),
     }))
+    state.serverLastUpdated = dateSort
   },
 }

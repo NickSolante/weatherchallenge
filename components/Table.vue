@@ -4,7 +4,9 @@
       <div>
         <div class="text-center card">
           <p class="suburb">{{ name }}</p>
-          <p class="iconSize"></p>
+          <p class="iconSize">
+            <font-awesome-icon :icon="icons" />
+          </p>
           <p>{{ condition }}</p>
           <p class="temperature">{{ temp + '°' }}</p>
           <p>{{ updated }}</p>
@@ -15,7 +17,6 @@
 </template>
 
 <script>
-import { appIcons, logos } from '@/assets/ionicons'
 export default {
   props: {
     id: { type: Number, default: 0 },
@@ -27,39 +28,29 @@ export default {
   },
   data() {
     return {
-      ionicons: [
-        {
-          name: 'App icons',
-          icons: appIcons,
-        },
-        {
-          name: 'Logos',
-          icons: logos,
-        },
-      ],
-      ionicon: '',
+      icons: [],
     }
   },
   mounted() {
-    this.ionicon = this.iconHandler(this.icon)
+    this.icons = ['fas', this.iconHandler(this.icon)]
   },
   methods: {
     iconHandler(weather) {
       switch (weather) {
         case 'partlycloudy':
-          return 'partly-sunny'
+          return 'cloud-sun'
         case 'clear':
-          return 'sunny'
+          return 'sun'
         case 'cloudy':
           return 'cloudy'
         case 'mostlycloudy':
-          return 'cloudy'
+          return 'cloud'
         case 'rain':
-          return 'rainy'
+          return 'cloud-rain'
         case 'hazy':
-          return 'eye-off'
+          return 'smog'
         case 'fog':
-          return 'eye-off'
+          return 'smog'
       }
     },
   },
