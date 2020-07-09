@@ -2,6 +2,9 @@ import _ from 'lodash'
 import Vuex from 'vuex'
 import { createLocalVue } from '@vue/test-utils'
 
+// writing tests for vuex is new to me so I was only able to pretty much test the most simple one's like the getters
+// I tried to mock the state to pass to the getters but have not gotten it to work so I've excluded it
+
 describe('store/weather', () => {
   const localVue = createLocalVue()
   localVue.use(Vuex)
@@ -18,7 +21,7 @@ describe('store/weather', () => {
     store = await NuxtStore.createStore()
   })
   // trying to test all the getters
-  describe('temperatureLevels', () => {
+  describe('Testing temperatureLevel getter', () => {
     let temperature
 
     beforeEach(() => {
@@ -33,7 +36,8 @@ describe('store/weather', () => {
       expect(temperature.length).toBe(0)
     })
   })
-  describe('alphabeticalOrder', () => {
+
+  describe('Testing alphabetical order getter', () => {
     let alphaOrder
 
     beforeEach(() => {
@@ -49,7 +53,7 @@ describe('store/weather', () => {
     })
   })
 
-  describe('mostRecentServerUpdate', () => {
+  describe('Testing most recent Server update', () => {
     let updates
 
     beforeEach(() => {
