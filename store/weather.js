@@ -8,7 +8,8 @@ export const getters = {
     return state.weatherData.map((data) => ({
       id: parseInt(data._venueID),
       name: data._name,
-      weatherCondition: data._weatherConditionIcon,
+      weatherCondition: data._weatherCondition,
+      weatherIcon: data._weatherConditionIcon,
       temp: parseInt(data._weatherTemp),
       lastUpdated: moment.unix(data._weatherLastUpdated).format('LLL'),
     }))

@@ -1,21 +1,22 @@
 <template>
   <div class="container">
-    <b-container>
-      <div>
-        <h1 class="title">
-          Weather App
-        </h1>
+    <div>
+      <h1 class="title">
+        Weather App
+      </h1>
+      <b-row>
         <Table
           v-for="weather in weatherData"
           :id="weather.id"
           :key="weather.id"
           :name="weather.name"
-          :weather="weather.weatherCondition"
+          :condition="weather.weatherCondition"
+          :icon="weather.weatherIcon"
           :temp="weather.temp"
           :updated="weather.lastUpdated"
         />
-      </div>
-    </b-container>
+      </b-row>
+    </div>
   </div>
 </template>
 
